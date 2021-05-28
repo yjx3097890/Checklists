@@ -7,10 +7,18 @@
 
 import UIKit
 
+
+protocol AddItemViewControllerDelegate: AnyObject {
+    func addItemViewControllerDidCancel(_ controller: AddItemViewController)
+    func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: ChecklistItem)
+}
+
 class AddItemViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var doneBtn: UIBarButtonItem!
+    
+    weak var delegate: AddItemViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,15 +42,15 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
 
     // MARK: - Actions
     @IBAction func cancel() {
-      navigationController?.popViewController(animated: true)
+        delegate?.addItemViewControllerDidCancel(self)
     }
   
     @IBAction func save() {
         let item = ChecklistItem()
-        item.text = "item1"
+        item.text = textField.text!
         item.checked = false
       
-        navigationController?.popViewController(animated: true)
+        delegate?.addItemViewController(self, didFinishAdding: item)
     }
    
 //    @IBAction func keyUp(_ sender: UITextField) {

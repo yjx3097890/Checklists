@@ -7,8 +7,7 @@
 
 import UIKit
 
-class ChecklistTableViewController: UITableViewController {
-
+class ChecklistTableViewController: UITableViewController, AddItemViewControllerDelegate {
     
     var items = [ChecklistItem]()
     
@@ -134,26 +133,33 @@ class ChecklistTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "AddItem" {
+            (segue.destination as? AddItemViewController)?.delegate = self
+        }
     }
-    */
+    
     
     // MARK: - Actions
-    @IBAction func addItem() {
-        let item = ChecklistItem()
-        item.text = "item1"
-        item.checked = false
+
+    
+    // Mark: - addItem delegate
+    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: ChecklistItem) {
+        navigationController?.popViewController(animated: true)
         items.append(item)
-        
         let indexPath = IndexPath(row: items.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
-    
+        
     }
 
 }
