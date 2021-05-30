@@ -15,27 +15,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ChecklistItem" id="F5h-uX-8uw">
-                                <rect key="frame" x="0.0" y="24.5" width="375" height="22.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="ChecklistItem" editingAccessoryType="detailDisclosureButton" id="F5h-uX-8uw">
+                                <rect key="frame" x="0.0" y="24.5" width="375" height="49.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="F5h-uX-8uw" id="Oxp-z4-eL5">
-                                    <rect key="frame" x="0.0" y="0.0" width="338.5" height="22.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="321" height="49.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VkF-3m-bm0">
-                                            <rect key="frame" x="16" y="11" width="314.5" height="0.5"/>
+                                            <rect key="frame" x="35.5" y="11" width="277.5" height="27.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="√" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8f4-Vc-mBW">
+                                            <rect key="frame" x="16" y="11" width="13" height="27.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="13" id="Ksl-pE-D5i"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="VkF-3m-bm0" secondAttribute="trailing" id="I2T-TW-8mV"/>
-                                        <constraint firstItem="VkF-3m-bm0" firstAttribute="leading" secondItem="Oxp-z4-eL5" secondAttribute="leadingMargin" id="af8-FJ-KOq"/>
+                                        <constraint firstItem="8f4-Vc-mBW" firstAttribute="top" secondItem="Oxp-z4-eL5" secondAttribute="topMargin" id="ELJ-vc-s83"/>
+                                        <constraint firstItem="8f4-Vc-mBW" firstAttribute="leading" secondItem="Oxp-z4-eL5" secondAttribute="leadingMargin" id="FwV-Pg-Ahv"/>
+                                        <constraint firstItem="VkF-3m-bm0" firstAttribute="trailing" secondItem="Oxp-z4-eL5" secondAttribute="trailingMargin" id="LOP-s4-E2Q"/>
                                         <constraint firstItem="VkF-3m-bm0" firstAttribute="top" secondItem="Oxp-z4-eL5" secondAttribute="topMargin" id="bVZ-Yd-Gj8"/>
+                                        <constraint firstItem="VkF-3m-bm0" firstAttribute="leading" secondItem="8f4-Vc-mBW" secondAttribute="leadingMargin" constant="11.5" id="cmD-cU-VoW"/>
+                                        <constraint firstItem="VkF-3m-bm0" firstAttribute="leading" secondItem="8f4-Vc-mBW" secondAttribute="trailing" constant="6.5" id="l8x-NU-rhL"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="8f4-Vc-mBW" secondAttribute="bottom" id="oAX-6e-6wj"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="VkF-3m-bm0" secondAttribute="bottom" id="rhW-FT-DgI"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="KVr-v7-I3u" kind="show" identifier="EditItem" trigger="accessoryAction" id="lXS-oL-5nq"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -58,7 +74,7 @@
         <!--Add Item-->
         <scene sceneID="3MW-nW-qF2">
             <objects>
-                <tableViewController id="KVr-v7-I3u" customClass="AddItemViewController" customModule="Checklists" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="KVr-v7-I3u" customClass="ItemDetailViewController" customModule="Checklists" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="jVk-sr-idl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -139,6 +155,9 @@
             <point key="canvasLocation" x="100" y="49.025487256371818"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="lXS-oL-5nq"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
