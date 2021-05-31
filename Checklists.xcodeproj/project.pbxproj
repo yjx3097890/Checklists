@@ -15,6 +15,7 @@
 		092A455E26566924001D1683 /* ChecklistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092A455D26566924001D1683 /* ChecklistTableViewController.swift */; };
 		092A4560265B57D2001D1683 /* ChecklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092A455F265B57D2001D1683 /* ChecklistItem.swift */; };
 		098B6710265CA94A00160C7E /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098B670F265CA94A00160C7E /* ItemDetailViewController.swift */; };
+		09D79FB82664B9D1007D745A /* AllTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D79FB72664B9D1007D745A /* AllTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		092A455D26566924001D1683 /* ChecklistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChecklistTableViewController.swift; sourceTree = "<group>"; };
 		092A455F265B57D2001D1683 /* ChecklistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
 		098B670F265CA94A00160C7E /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
+		09D79FB72664B9D1007D745A /* AllTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				092A45532654FF2A001D1683 /* Info.plist */,
 				092A455F265B57D2001D1683 /* ChecklistItem.swift */,
 				098B670F265CA94A00160C7E /* ItemDetailViewController.swift */,
+				09D79FB72664B9D1007D745A /* AllTableViewController.swift */,
 			);
 			path = Checklists;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 				098B6710265CA94A00160C7E /* ItemDetailViewController.swift in Sources */,
 				092A455E26566924001D1683 /* ChecklistTableViewController.swift in Sources */,
 				092A45462654FF25001D1683 /* AppDelegate.swift in Sources */,
+				09D79FB82664B9D1007D745A /* AllTableViewController.swift in Sources */,
 				092A45482654FF25001D1683 /* SceneDelegate.swift in Sources */,
 				092A4560265B57D2001D1683 /* ChecklistItem.swift in Sources */,
 			);

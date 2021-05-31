@@ -69,8 +69,11 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        navigationController?.navigationBar.prefersLargeTitles = true
-        loadItems()
+        
+        // Disable large titles for this view controller
+        navigationItem.largeTitleDisplayMode = .never
+
+         loadItems()
 
     }
 
