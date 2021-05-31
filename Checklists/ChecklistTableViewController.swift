@@ -29,8 +29,38 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
       let label = cell.viewWithTag(1000) as! UILabel
       label.text = item.text
     }
+    
+    func documentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func dataFilePath() -> URL {
+        return documentsDirectory().appendingPathComponent("Checklists.plist")
+    }
 
-
+    func saveItems() {
+        let encoder = PropertyListEncoder()
+        do {
+            let data = try encoder.encode(items)
+            try data.write(to: dataFilePath(), options: Data.WritingOptions.atomic)
+        } catch {
+            print("Error encoding item array: \(error.localizedDescription)")
+        }
+    }
+    
+    func loadItems() {
+        if let data = try? Data(contentsOf: dataFilePath()) {
+            let decoder = PropertyListDecoder()
+            
+            do {
+                items = try decoder.decode([ChecklistItem].self, from: data)
+            } catch {
+                print("Error decoding item array: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        // navigationController?.navigationBar.prefersLargeTitles = true
@@ -39,28 +69,8 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-       
-        let item1 = ChecklistItem()
-          item1.text = "Walk the dog"
-          items.append(item1)
-
-          let item2 = ChecklistItem()
-          item2.text = "Brush my teeth"
-          item2.checked = true
-          items.append(item2)
-
-          let item3 = ChecklistItem()
-          item3.text = "Learn iOS development"
-          item3.checked = true
-          items.append(item3)
-
-          let item4 = ChecklistItem()
-          item4.text = "Soccer practice"
-          items.append(item4)
-
-          let item5 = ChecklistItem()
-          item5.text = "Eat ice cream"
-          items.append(item5)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        loadItems()
 
     }
 
@@ -93,7 +103,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
             item.checked.toggle()
            
             configureCheckmark(for: cell, with: item)
-            
+            saveItems()
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -114,6 +124,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
             // Delete the row from the data source
             items.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            saveItems()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
@@ -168,6 +179,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
         items.append(item)
         let indexPath = IndexPath(row: items.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
+        saveItems()
         
         navigationController?.popViewController(animated: true)
     }
@@ -179,6 +191,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
             let indexPath = IndexPath(row: index, section: 0)
             
             tableView.reloadRows(at: [indexPath], with: .automatic)
+            saveItems()
         }
         
         navigationController?.popViewController(animated: true)
