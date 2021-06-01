@@ -12,4 +12,9 @@ class Checklist: NSObject, Codable {
     var name: String = ""
     var items: Array<ChecklistItem> = []
     
+    init(name: String) {
+        self.name = name
+        super.init()
+    }
+    
 }

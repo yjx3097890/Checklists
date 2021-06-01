@@ -10,6 +10,8 @@ import UIKit
 class ChecklistTableViewController: UITableViewController, ItemDetailViewControllerDelegate {
     
     var items = [ChecklistItem]()
+    var checklist: Checklist!
+    
     
     func configureCheckmark(for cell: UITableViewCell,with item: ChecklistItem) {
         
@@ -72,7 +74,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
         
         // Disable large titles for this view controller
         navigationItem.largeTitleDisplayMode = .never
-
+        title = checklist.name
          loadItems()
 
     }
