@@ -9,7 +9,7 @@ import UIKit
 
 class AllTableViewController: UITableViewController {
     
-    var alllist = Array<[ChecklistItem]>()
+    var alllist = Array<Checklist>()
     let cellIdentifier = "ChecklistCell"
     
 
