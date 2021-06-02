@@ -192,7 +192,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: ChecklistItem) {
         
         if let index = items.firstIndex(of: item) {
-            items[index].text = item.text
+          //  items[index].text = item.text
             let indexPath = IndexPath(row: index, section: 0)
             
             tableView.reloadRows(at: [indexPath], with: .automatic)
