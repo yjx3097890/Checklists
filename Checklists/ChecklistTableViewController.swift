@@ -7,6 +7,16 @@
 
 import UIKit
 
+func documentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
+
+func dataFilePath() -> URL {
+    return documentsDirectory().appendingPathComponent("Checklists.plist")
+}
+
+
 class ChecklistTableViewController: UITableViewController, ItemDetailViewControllerDelegate {
     
     var items = [ChecklistItem]()
@@ -32,15 +42,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
       label.text = item.text
     }
     
-    func documentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
-    }
-    
-    func dataFilePath() -> URL {
-        return documentsDirectory().appendingPathComponent("Checklists.plist")
-    }
-
+ 
     func saveItems() {
         let encoder = PropertyListEncoder()
         do {
@@ -88,14 +90,14 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return items.count
+        return checklist.items.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChecklistItem", for: indexPath)
         
-        let item = items[indexPath.row]
+        let item = checklist.items[indexPath.row]
         configureText(for: cell, with: item)
         configureCheckmark(for: cell, with: item)
          return cell
@@ -104,7 +106,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
             
-            let item = items[indexPath.row]
+            let item = checklist.items[indexPath.row]
             item.checked.toggle()
            
             configureCheckmark(for: cell, with: item)
@@ -127,7 +129,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            items.remove(at: indexPath.row)
+            checklist.items.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             saveItems()
         } else if editingStyle == .insert {
@@ -165,7 +167,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
             addController?.delegate = self
             
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
-                addController?.itemToEdit = items[indexPath.row]
+                addController?.itemToEdit = checklist.items[indexPath.row]
             }
         }
     }
@@ -181,8 +183,8 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
     
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAdding item: ChecklistItem) {
       
-        items.append(item)
-        let indexPath = IndexPath(row: items.count - 1, section: 0)
+        checklist.items.append(item)
+        let indexPath = IndexPath(row: checklist.items.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
         saveItems()
         
@@ -191,8 +193,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
     
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: ChecklistItem) {
         
-        if let index = items.firstIndex(of: item) {
-          //  items[index].text = item.text
+        if let index = checklist.items.firstIndex(of: item) {
             let indexPath = IndexPath(row: index, section: 0)
             
             tableView.reloadRows(at: [indexPath], with: .automatic)

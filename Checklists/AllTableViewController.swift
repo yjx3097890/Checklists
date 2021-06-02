@@ -12,6 +12,28 @@ class AllTableViewController: UITableViewController, ListDetailViewControllerDel
     var alllist = Array<Checklist>()
     let cellIdentifier = "ChecklistCell"
     
+    func save() {
+        let encoder = PropertyListEncoder()
+        do {
+            let data = try encoder.encode(alllist)
+            try data.write(to: dataFilePath(), options: .atomic)
+        } catch {
+            print("\(error.localizedDescription)")
+        }
+    }
+    
+    func load() {
+        if let data = try? Data(contentsOf: dataFilePath()) {
+            let decoder = PropertyListDecoder()
+            do {
+                alllist = try decoder.decode([Checklist].self, from: data)
+            } catch  {
+                print("\(error.localizedDescription)")
+            }
+        }
+        
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,19 +42,8 @@ class AllTableViewController: UITableViewController, ListDetailViewControllerDel
         // 注册可用的 cell
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
-        // 1
-        var list = Checklist(name: "Birthdays")
-        alllist.append(list)
-
-        // 2
-        list = Checklist(name: "Groceries")
-        alllist.append(list)
-
-        list = Checklist(name: "Cool Apps")
-        alllist.append(list)
-
-        list = Checklist(name: "To Do")
-        alllist.append(list)
+        //
+       load()
         
     }
 
@@ -78,7 +89,7 @@ class AllTableViewController: UITableViewController, ListDetailViewControllerDel
       
         alllist.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
-        
+        save()
     }
     
  
@@ -106,6 +117,7 @@ class AllTableViewController: UITableViewController, ListDetailViewControllerDel
         alllist.append(checklist)
         tableView.insertRows(at: [IndexPath(row: alllist.count - 1, section: 0)], with: .automatic)
         navigationController?.popViewController(animated: true)
+        save()
     }
     
     func listDetailViewController(_ controller: ListDetailViewController, didFinishEditing checklist: Checklist) {
@@ -113,6 +125,7 @@ class AllTableViewController: UITableViewController, ListDetailViewControllerDel
             let indexPath = IndexPath(row: index, section: 0)
             let cell = tableView.cellForRow(at: indexPath)
             cell?.textLabel?.text = checklist.name
+            save()
         }
         navigationController?.popViewController(animated: true)
     }
