@@ -7,19 +7,9 @@
 
 import UIKit
 
-func documentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return paths[0]
-}
-
-func dataFilePath() -> URL {
-    return documentsDirectory().appendingPathComponent("Checklists.plist")
-}
-
-
 class ChecklistTableViewController: UITableViewController, ItemDetailViewControllerDelegate {
     
-    var items = [ChecklistItem]()
+   
     var checklist: Checklist!
     
     
@@ -42,28 +32,6 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
       label.text = item.text
     }
     
- 
-    func saveItems() {
-        let encoder = PropertyListEncoder()
-        do {
-            let data = try encoder.encode(items)
-            try data.write(to: dataFilePath(), options: Data.WritingOptions.atomic)
-        } catch {
-            print("Error encoding item array: \(error.localizedDescription)")
-        }
-    }
-    
-    func loadItems() {
-        if let data = try? Data(contentsOf: dataFilePath()) {
-            let decoder = PropertyListDecoder()
-            
-            do {
-                items = try decoder.decode([ChecklistItem].self, from: data)
-            } catch {
-                print("Error decoding item array: \(error.localizedDescription)")
-            }
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +45,6 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
         // Disable large titles for this view controller
         navigationItem.largeTitleDisplayMode = .never
         title = checklist.name
-         loadItems()
 
     }
 
@@ -110,7 +77,6 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
             item.checked.toggle()
            
             configureCheckmark(for: cell, with: item)
-            saveItems()
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -131,8 +97,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
             // Delete the row from the data source
             checklist.items.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            saveItems()
-        } else if editingStyle == .insert {
+         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
@@ -186,8 +151,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
         checklist.items.append(item)
         let indexPath = IndexPath(row: checklist.items.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
-        saveItems()
-        
+ 
         navigationController?.popViewController(animated: true)
     }
     
@@ -197,8 +161,7 @@ class ChecklistTableViewController: UITableViewController, ItemDetailViewControl
             let indexPath = IndexPath(row: index, section: 0)
             
             tableView.reloadRows(at: [indexPath], with: .automatic)
-            saveItems()
-        }
+         }
         
         navigationController?.popViewController(animated: true)
     }
