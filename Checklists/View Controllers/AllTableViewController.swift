@@ -8,7 +8,7 @@
 import UIKit
 
 
-class AllTableViewController: UITableViewController, ListDetailViewControllerDelegate {
+class AllTableViewController: UITableViewController, ListDetailViewControllerDelegate, UINavigationControllerDelegate {
    
      let cellIdentifier = "ChecklistCell"
     var dataModel: DataModel!
@@ -20,7 +20,19 @@ class AllTableViewController: UITableViewController, ListDetailViewControllerDel
         // 注册可用的 cell
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
-      
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // TODO:  xiugai
+        super.viewDidAppear(animated)
+        
+        navigationController?.delegate = self
+        
+        let index = dataModel.indexOfSelectedChecklist
+        if index != -1 && index < dataModel.list.count {
+            let checklist = dataModel.list[index]
+            performSegue(withIdentifier: "ShowChecklist", sender: checklist)
+        }
         
     }
 
@@ -47,6 +59,7 @@ class AllTableViewController: UITableViewController, ListDetailViewControllerDel
          let checklist = dataModel.list[indexPath.row]
         performSegue(withIdentifier: "ShowChecklist", sender: checklist)
         
+        dataModel.indexOfSelectedChecklist = indexPath.row
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
@@ -104,5 +117,14 @@ class AllTableViewController: UITableViewController, ListDetailViewControllerDel
         }
         navigationController?.popViewController(animated: true)
     }
+    
+    // MARK: - Navigation Controller Delegate
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if viewController === self {
+            dataModel.indexOfSelectedChecklist = -1
+        }
+    }
+    
+   
 
 }
