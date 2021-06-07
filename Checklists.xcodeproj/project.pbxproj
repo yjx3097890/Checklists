@@ -68,21 +68,45 @@
 		092A45442654FF25001D1683 /* Checklists */ = {
 			isa = PBXGroup;
 			children = (
-				092A455D26566924001D1683 /* ChecklistTableViewController.swift */,
+				09E8758E266DFE5800938584 /* Data Models */,
+				09E87590266DFEA300938584 /* Resources */,
+				09E8758F266DFE7E00938584 /* View Controllers */,
+				092A45532654FF2A001D1683 /* Info.plist */,
 				092A45452654FF25001D1683 /* AppDelegate.swift */,
 				092A45472654FF25001D1683 /* SceneDelegate.swift */,
-				092A454B2654FF25001D1683 /* Main.storyboard */,
-				092A454E2654FF2A001D1683 /* Assets.xcassets */,
-				092A45502654FF2A001D1683 /* LaunchScreen.storyboard */,
-				092A45532654FF2A001D1683 /* Info.plist */,
-				092A455F265B57D2001D1683 /* ChecklistItem.swift */,
-				098B670F265CA94A00160C7E /* ItemDetailViewController.swift */,
-				09D79FB72664B9D1007D745A /* AllTableViewController.swift */,
-				09C757B826652740008A1C96 /* Checklist.swift */,
-				09D79FB926671BCC007D745A /* ListDetailViewController.swift */,
-				09A066D3266D190C00FC199A /* DataModel.swift */,
 			);
 			path = Checklists;
+			sourceTree = "<group>";
+		};
+		09E8758E266DFE5800938584 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				09C757B826652740008A1C96 /* Checklist.swift */,
+				092A455F265B57D2001D1683 /* ChecklistItem.swift */,
+				09A066D3266D190C00FC199A /* DataModel.swift */,
+			);
+			path = "Data Models";
+			sourceTree = "<group>";
+		};
+		09E8758F266DFE7E00938584 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				09D79FB72664B9D1007D745A /* AllTableViewController.swift */,
+				092A455D26566924001D1683 /* ChecklistTableViewController.swift */,
+				098B670F265CA94A00160C7E /* ItemDetailViewController.swift */,
+				09D79FB926671BCC007D745A /* ListDetailViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		09E87590266DFEA300938584 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				092A454E2654FF2A001D1683 /* Assets.xcassets */,
+				092A45502654FF2A001D1683 /* LaunchScreen.storyboard */,
+				092A454B2654FF25001D1683 /* Main.storyboard */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
