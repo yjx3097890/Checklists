@@ -47,6 +47,10 @@ class DataModel {
         
     }
     
+    func sortChecklist() {
+        <#function body#>
+    }
+    
     func documentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
