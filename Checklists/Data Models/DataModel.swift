@@ -40,6 +40,7 @@ class DataModel {
             let decoder = PropertyListDecoder()
             do {
                 list = try decoder.decode([Checklist].self, from: data)
+                sortChecklist()
             } catch  {
                 print("\(error.localizedDescription)")
             }
@@ -48,7 +49,9 @@ class DataModel {
     }
     
     func sortChecklist() {
-        <#function body#>
+        list.sort { l1, l2 in
+            l1.name.localizedStandardCompare(l2.name) == .orderedAscending
+        }
     }
     
     func documentsDirectory() -> URL {

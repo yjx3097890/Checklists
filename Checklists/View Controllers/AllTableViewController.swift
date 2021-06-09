@@ -73,6 +73,7 @@ class AllTableViewController: UITableViewController, ListDetailViewControllerDel
         if dataModel.list[indexPath.row].items.count == 0 {
             cell.detailTextLabel?.text = "No Items"
         }
+        cell.imageView?.image = UIImage(named: dataModel.list[indexPath.row].iconName)
         return cell
     }
     
