@@ -3,6 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -280,6 +281,75 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="Qnx-NI-Q8G">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="44" id="uaG-Ic-pr2">
+                                        <rect key="frame" x="0.0" y="97.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uaG-Ic-pr2" id="pyG-rj-gnZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind Me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGd-Xt-hcD">
+                                                    <rect key="frame" x="16" y="12" width="278" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ufo-p3-xM6">
+                                                    <rect key="frame" x="310" y="7" width="51" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="36" id="Hjs-8J-dus"/>
+                                                    </constraints>
+                                                    <color key="onTintColor" name="AccentColor"/>
+                                                    <connections>
+                                                        <action selector="shouldRemindToggle:" destination="KVr-v7-I3u" eventType="valueChanged" id="lw2-1z-fc5"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cGd-Xt-hcD" firstAttribute="leading" secondItem="pyG-rj-gnZ" secondAttribute="leadingMargin" id="HeX-7f-qWi"/>
+                                                <constraint firstItem="ufo-p3-xM6" firstAttribute="leading" secondItem="cGd-Xt-hcD" secondAttribute="trailing" constant="16" id="IWm-ga-Otz"/>
+                                                <constraint firstAttribute="trailing" secondItem="ufo-p3-xM6" secondAttribute="trailing" constant="16" id="Jf3-Fm-6n7"/>
+                                                <constraint firstAttribute="bottom" secondItem="ufo-p3-xM6" secondAttribute="bottom" constant="1" id="Vqe-vV-Wek"/>
+                                                <constraint firstItem="cGd-Xt-hcD" firstAttribute="centerY" secondItem="ufo-p3-xM6" secondAttribute="centerY" constant="-2.75" id="pJk-GD-19J"/>
+                                                <constraint firstItem="ufo-p3-xM6" firstAttribute="top" secondItem="pyG-rj-gnZ" secondAttribute="top" constant="7" id="yPi-eX-vDI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="9k4-oU-Ja6">
+                                        <rect key="frame" x="0.0" y="141.5" width="375" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9k4-oU-Ja6" id="aCg-BN-ZBO">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Due Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPn-HG-dqy">
+                                                    <rect key="frame" x="16" y="12" width="135" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="HHB-MI-dLz">
+                                                    <rect key="frame" x="155" y="4" width="220" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="220" id="3vY-Al-40I"/>
+                                                    </constraints>
+                                                    <locale key="locale" localeIdentifier="zh-Hans"/>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="HHB-MI-dLz" firstAttribute="leading" secondItem="zPn-HG-dqy" secondAttribute="trailing" constant="4" id="9LA-as-t6F"/>
+                                                <constraint firstItem="zPn-HG-dqy" firstAttribute="leading" secondItem="aCg-BN-ZBO" secondAttribute="leadingMargin" id="DFH-8D-Jt5"/>
+                                                <constraint firstAttribute="trailing" secondItem="HHB-MI-dLz" secondAttribute="trailing" id="Dle-84-X20"/>
+                                                <constraint firstItem="HHB-MI-dLz" firstAttribute="top" secondItem="aCg-BN-ZBO" secondAttribute="top" constant="4" id="ehc-Uj-Ars"/>
+                                                <constraint firstItem="zPn-HG-dqy" firstAttribute="centerY" secondItem="HHB-MI-dLz" secondAttribute="centerY" id="py3-Pe-JPJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="HHB-MI-dLz" secondAttribute="bottom" constant="4" id="vly-h4-nSV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="KVr-v7-I3u" id="z9C-pc-KOe"/>
@@ -300,6 +370,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="doneBtn" destination="RZU-l7-6f7" id="SCU-VO-CEE"/>
+                        <outlet property="dueDatePicker" destination="HHB-MI-dLz" id="pEm-om-dN3"/>
+                        <outlet property="shouldRemindSwitch" destination="ufo-p3-xM6" id="ViD-JN-Hpu"/>
                         <outlet property="textField" destination="LJ0-ZG-p0r" id="yl1-Oo-Rwg"/>
                     </connections>
                 </tableViewController>
@@ -332,6 +404,9 @@
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.015686274509803921" green="0.66274509803921566" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
     <resources>
+        <namedColor name="AccentColor">
+            <color red="0.29800000786781311" green="0.65600001811981201" blue="0.90600001811981201" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

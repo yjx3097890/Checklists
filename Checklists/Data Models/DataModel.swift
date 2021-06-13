@@ -83,6 +83,11 @@ class DataModel {
         }
     }
     
+    static func nextItemId() -> Int {
+        let itemId = UserDefaults.standard.integer(forKey: "ChecklistItemID")
+        UserDefaults.standard.set(itemId + 1, forKey: "ChecklistItemID")
+        return itemId
+    }
 }
 
 

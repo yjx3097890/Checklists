@@ -18,6 +18,8 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var doneBtn: UIBarButtonItem!
+    @IBOutlet weak var shouldRemindSwitch: UISwitch!
+    @IBOutlet weak var dueDatePicker: UIDatePicker!
     
     weak var delegate: ItemDetailViewControllerDelegate?
     
@@ -30,6 +32,11 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         if let item = itemToEdit {
             title = "Edit Item"
             textField.text = item.text
+            shouldRemindSwitch.isOn = item.shouldNotify
+            dueDatePicker.date = item.date
+            doneBtn.isEnabled = true
+        } else {
+            dueDatePicker.date = Date(timeIntervalSinceNow: 600)
         }
         return
     }
@@ -55,12 +62,24 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
       
         if let itemToEdit = itemToEdit {
             itemToEdit.text = textField.text!
+            itemToEdit.shouldNotify = shouldRemindSwitch.isOn
+            itemToEdit.date = dueDatePicker.date
+            itemToEdit.scheduleNotification()
             delegate?.itemDetailViewController(self, didFinishEditing: itemToEdit)
         } else {
-            let item = ChecklistItem()
-            item.text = textField.text!
-            item.checked = false
+            let item = ChecklistItem(label: textField.text!, date: dueDatePicker.date, shouldNotify: shouldRemindSwitch.isOn)
+            item.scheduleNotification()
             delegate?.itemDetailViewController(self, didFinishAdding: item)
+        }
+    }
+    
+    @IBAction func shouldRemindToggle(_ switchControl: UISwitch) {
+        textField.resignFirstResponder()
+        if switchControl.isOn  {
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.alert, .sound], completionHandler: {auth,_ in
+                print(auth ? "permit": "deny")
+            })
         }
     }
    
